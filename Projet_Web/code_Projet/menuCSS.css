@@ -1,0 +1,346 @@
+/* ==================== */
+/* RESET ET CONFIG DE BASE */
+/* ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ==================== */
+/* VARIABLES CSS */
+/* ==================== */
+:root {
+    /* Couleurs principales */
+    --primary: #4361ee;
+    --primary-dark: #3a56d4;
+    --secondary: #f8f9fa;
+
+    /* Couleurs de texte */
+    --text: #2b2d42;
+    --text-light: #8d99ae;
+
+    /* Feedback */
+    --error: #ef233c;
+    --success: #2ec4b6;
+
+    /* Décoration */
+    --border: #e9ecef;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ==================== */
+/* STRUCTURE PRINCIPALE */
+/* ==================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-image: url('Image/bgc.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* ==================== */
+/* COMPOSANTS D'INTERFACE */
+/* ==================== */
+
+/* Conteneur d'introduction */
+.intro-container {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1.5s forwards 0.5s;
+}
+
+.intro-container p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+h1 {
+    color: #3778c2;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+p {
+    color: #333;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+}
+
+.money-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    display: inline-block;
+    animation: bounce 2s infinite;
+}
+
+/* Formulaire d'authentification */
+.auth-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    z-index: 1000;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+/* ===== FORM CONTAINERS ===== */
+.form-container {
+    background: rgba(255, 255, 255, 0.192);
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    width: 90%;
+    max-width: 400px;
+    display: none;
+    z-index: 1000;
+    margin: auto;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.form-container.active {
+    display: block;
+}
+
+.form-group p {
+    margin: 0 0 0.3rem 0;
+    font-size: 0.9rem;
+    color: #4a4a4a;
+    font-weight: 500;
+    width: 100%;
+    max-width: 350px;
+    text-align: left;
+}
+
+.form-group input {
+    width: 100%;
+    max-width: 375px; 
+    padding: 0.7rem;
+    border: 2px solid #c2e9fb;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin: 0 auto;
+    outline-color: #3778c2;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    display: none;
+}
+
+.success-message {
+    color: #2ecc71;
+    background: #e8f5e9;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    display: none;
+    text-align: center;
+}
+
+.toggle-form {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.toggle-form a {
+    color: #3778c2;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.toggle-form a:hover {
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
+}
+
+.auth-container.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    height: 0;
+    overflow: hidden;
+}
+
+/* BOUTONS */
+.start-btn {
+    width: 100%;
+    padding: 0.875rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+#registration-form .start-btn,
+#login-form .start-btn {
+    margin-top: 1.5rem;
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.start-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.start-btn::before {
+    content: "";
+    position: absolute;
+    top: -130%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+    transform: translateX(-100%) rotate(25deg);
+    transition: transform 0.6s ease-in-out;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.start-btn:hover::before {
+    transform: translateX(100%) rotate(25deg);
+}
+
+#guest-btn {
+    background-color: #4361ee; 
+    color: white;
+    border: none; 
+    margin-top: 1rem;
+}
+
+.guest-btn {
+    background-color: #6c757d;
+}
+
+/* ==================== */
+/* ANIMATIONS */
+/* ==================== */
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(10px); } 
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes fly {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+
+@keyframes formSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes borderMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Pièces volantes */
+.flying-coins {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.coin {
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: fly linear infinite;
+}
+
+/* ==================== */
+/* ADAPTATION MOBILE */
+/* ==================== */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .form-container {
+        padding: 1rem;
+    }
+
+    .form-group input {
+        padding: 0.6rem;
+    }
+    .start-btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-height: 700px) {
+    .form-container {
+        padding: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 0.8rem;
+    }
+
+    .form-group input {
+        padding: 0.6rem;
+    }
+}

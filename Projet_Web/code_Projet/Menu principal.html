@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de Budget</title>
+    <link rel="stylesheet" href="menuCSS.css">
+</head>
+<body>
+    <!-- Animation de pièces volantes pour l'effet visuel -->
+    <div class="flying-coins" id="flying-coins"></div>
+
+    <!-- Section d'introduction avec le titre, la description et le bouton de démarrage -->
+    <div class="intro-container">
+        <div class="money-icon">💰</div> <!-- Icône illustrant l'argent -->
+        <h1>Gestionnaire de Budget Personnel</h1> <!-- Titre principal -->
+        <p>Prenez le contrôle de vos finances avec notre outil simple et efficace. Suivez vos revenus et dépenses, visualisez vos tendances et atteignez vos objectifs financiers.</p>
+        <button class="start-btn" id="start-btn">Commencer</button> <!-- Bouton pour démarrer l'inscription/connexion -->
+    </div>
+   
+    <!-- Conteneur pour les formulaires d'authentification (inscription et connexion), caché par défaut -->
+    <div class="auth-container hidden">
+        <!-- Formulaire d'inscription (affiché par défaut lors de l'ouverture de l'auth-container) -->
+        <div class="form-container active" id="signup-form">
+            <h2>Inscription requise</h2>
+            <form id="registration-form">
+                <!-- Champ pour le nom complet -->
+                <div class="form-group">
+                    <p>Nom complet</p>
+                    <input type="text" id="fullname" placeholder="Nom complet" required>
+                    <div class="error-message" id="fullname-error"></div>
+                </div>
+                <!-- Champ pour la date de naissance -->
+                <div class="form-group">
+                    <p>Date de naissance</p>
+                    <input type="date" id="birthdate" required>
+                    <div class="error-message" id="birthdate-error"></div>
+                </div>
+                <!-- Champ pour le numéro de carte d'identité (CIN) -->
+                <div class="form-group">
+                    <p>Le numéro de la carte d'identité</p>
+                    <input type="text" id="cin" placeholder="CIN" required>
+                    <div class="error-message" id="cin-error"></div>
+                </div>
+                <!-- Champ pour le mot de passe -->
+                <div class="form-group">
+                    <p>Mot de passe</p>
+                    <input type="password" id="password" placeholder="Mot de passe" required>
+                    <div class="error-message" id="password-error"></div>
+                </div>
+                <!-- Champ pour la confirmation du mot de passe -->
+                <div class="form-group">
+                    <p>Confirmation du mot de passe</p>
+                    <input type="password" id="confirm-password" placeholder="Confirmation du mot de passe" required>
+                    <div class="error-message" id="confirm-password-error"></div>
+                </div>
+                <!-- Bouton pour valider l'inscription -->
+                <button type="submit" class="start-btn">S'inscrire</button>
+                <!-- Lien pour basculer vers le formulaire de connexion -->
+                <p class="toggle-form">Déjà inscrit ? <a href="#" id="show-login">Se connecter</a></p>
+            </form>
+        </div>
+
+        <!-- Formulaire de connexion -->
+        <div class="form-container" id="login-form">
+            <h2>Connexion</h2>
+            <!-- Message de succès affiché après une inscription réussie -->
+            <div class="success-message" id="registration-success">Inscription réussie ! Veuillez vous connecter</div>
+            <form id="login-form">
+                <!-- Champ pour le CIN -->
+                <div class="form-group">
+                    <p>Entrez le CIN</p>
+                    <input type="text" id="login-cin" placeholder="CIN" required>
+                    <div class="error-message" id="login-cin-error"></div>
+                </div>
+                <!-- Champ pour le mot de passe -->
+                <div class="form-group">
+                    <p>Entrez le mot de passe</p>
+                    <input type="password" id="login-password" placeholder="Mot de passe" required>
+                    <div class="error-message" id="login-password-error"></div>
+                </div>
+                <!-- Bouton pour valider la connexion -->
+                <button type="submit" class="start-btn">Se connecter</button>
+                <!-- Bouton pour continuer en tant qu'invité -->
+                <button class="start-btn" id="guest-btn">Continuer en tant qu'invité</button>
+                <!-- Lien pour basculer vers le formulaire d'inscription -->
+                <p class="toggle-form">Première visite ? <a href="#" id="show-signup">Créer un compte</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Inclusion du script JavaScript pour la gestion de l'interactivité -->
+    <script src="menuJS.js"></script>
+</body>
+</html>

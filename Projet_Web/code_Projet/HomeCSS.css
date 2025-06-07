@@ -1,0 +1,550 @@
+/* === CSS Custom Properties === */
+/* Définition des variables globales pour les couleurs, espacements, polices, etc. */
+:root {
+    --primary: #5e60ce;              /* Couleur principale utilisée pour les éléments clés */
+    --primary-dark: #4b4da6;         /* Variante plus foncée de la couleur principale */
+    --secondary: #4a4e69;            /* Couleur secondaire */
+    --success: #48cae4;              /* Couleur pour les messages de succès */
+    --danger: #ff006e;               /* Couleur pour les messages d'erreur */
+    --light: #f9f7f3;                /* Couleur de fond claire */
+    --dark: #2d2d2d;                 /* Couleur de texte sombre */
+    --background: #f5f7fa;           /* Couleur de fond principale */
+    --background-dark: #1a1a2e;      /* Couleur de fond pour le mode sombre */
+    --text-dark: #ffffff;            /* Couleur de texte claire (pour mode sombre) */
+    --border-radius: 12px;           /* Rayon de bordure standard */
+    --border-radius-sm: 8px;         /* Rayon de bordure réduit */
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.1);      /* Ombre standard */
+    --shadow-dark: 0 6px 24px rgba(0, 0, 0, 0.3); /* Ombre pour mode sombre */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Animation de transition fluide */
+    --font-family: 'Poppins', sans-serif;          /* Police principale */
+    --font-size-base: 1rem;                        /* Taille de police de base */
+    --font-size-large: 1.3rem;                     /* Grande taille de police */
+    --font-size-xl: 2rem;                          /* Très grande taille de police */
+    --spacing-xs: 0.25rem;                         /* Espacement extra-petit */
+    --spacing-sm: 0.5rem;                          /* Espacement petit */
+    --spacing-md: 1rem;                            /* Espacement moyen */
+    --spacing-lg: 2rem;                            /* Espacement large */
+    --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); /* Dégradé principal */
+}
+
+/* === Dark Mode === */
+/* Définit certaines variables pour le mode sombre */
+[data-theme="dark"] {
+    --background: var(--background-dark);  /* Fond sombre */
+    --light: #2a2a3e;                      /* Fond clair adapté au sombre */
+    --dark: var(--text-dark);              /* Texte clair */
+    --shadow: var(--shadow-dark);          /* Ombre plus marquée */
+}
+
+/* Applique le fond clair adapté au mode sombre pour la sidebar et les cartes */
+[data-theme="dark"] .sidebar,
+[data-theme="dark"] .card {
+    background: var(--light);
+}
+
+/* Style des champs de formulaire en mode sombre */
+[data-theme="dark"] .input-section select,
+[data-theme="dark"] .input-section input {
+    background: var(--background-dark);
+    color: var(--text-dark);
+    border-color: #444;
+}
+
+/* Effet focus pour les champs en mode sombre */
+[data-theme="dark"] .input-section select:focus,
+[data-theme="dark"] .input-section input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 8px rgba(94, 96, 206, 0.5);
+}
+
+/* === Global Reset and Base Styles === */
+/* Réinitialisation des marges, paddings et box-sizing pour tous les éléments */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+/* Style de base du body : flex, couleur de fond, couleur du texte, etc. */
+body {
+    display: flex;
+    background: var(--background);
+    min-height: 100vh;
+    color: var(--dark);
+    transition: var(--transition);
+}
+
+/* === Theme Toggle === */
+/* Bouton pour changer le thème clair/sombre */
+.theme-toggle {
+    position: fixed;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    background: var(--primary-dark);
+    transform: scale(1.1);
+}
+
+.theme-toggle i {
+    font-size: var(--font-size-base);
+}
+
+/* === Sidebar Styles === */
+/* Barre latérale de navigation */
+.sidebar {
+    width: 260px;
+    background: white;
+    height: 100vh;
+    padding: var(--spacing-lg) var(--spacing-md);
+    box-shadow: var(--shadow);
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: var(--transition);
+}
+
+/* Logo de la sidebar */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--primary); /* Fallback pour les navigateurs non compatibles */
+    margin-bottom: 2.5rem;
+}
+
+.logo i {
+    font-size: 2rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text; /* Compatibilité standard */
+    -webkit-text-fill-color: transparent;
+    color: var(--primary); /* Fallback */
+    animation: pulse 2s infinite;
+}
+
+/* Animation du logo */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* Menu de navigation */
+.nav-menu {
+    list-style: none;
+}
+
+.nav-item {
+    margin-bottom: var(--spacing-sm);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 0.8rem 1.2rem;
+    border-radius: var(--border-radius);
+    color: var(--dark);
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: var(--gradient);
+    color: white;
+    transform: translateX(5px);
+}
+
+.nav-link i {
+    width: 24px;
+    text-align: center;
+    font-size: var(--font-size-large);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 0;
+    background: var(--primary);
+    transition: var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    height: 50%;
+}
+
+/* === Main Content Styles === */
+/* Contenu principal de la page */
+.main-content {
+    flex: 1;
+    margin-left: 260px;
+    padding: var(--spacing-lg);
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+/* Titre de page stylisé avec un dégradé */
+.page-title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--primary); /* Fallback */
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* === Card Component === */
+/* Cartes pour afficher des informations */
+.card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    font-size: var(--font-size-large);
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.card-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: var(--gradient);
+}
+
+/* === Input Section Styles === */
+/* Section pour les formulaires */
+.input-section {
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.input-section .form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.input-section label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.input-section select,
+.input-section input {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    border: 2px solid #ccc;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.input-section select:focus,
+.input-section input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 8px rgba(94, 96, 206, 0.3);
+}
+
+.input-section button {
+    padding: 0.9rem var(--spacing-lg);
+    background: var(--gradient);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.input-section button:hover {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+}
+
+/* Message de feedback pour l'utilisateur */
+#message {
+    margin-top: var(--spacing-md);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 12px;
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    display: none;
+    animation: fadeIn 0.5s ease-in;
+}
+
+#message.success {
+    color: var(--success);
+    background: rgba(72, 202, 228, 0.2);
+    border: 1px solid var(--success);
+}
+
+#message.danger {
+    color: var(--danger);
+    background: rgba(255, 0, 110, 0.2);
+    border: 1px solid var(--danger);
+}
+
+/* Animation d'apparition du message */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Overview Section === */
+/* Section de résumé des informations */
+.overview-section {
+    display: grid;
+    gap: var(--spacing-sm);
+    text-align: center;
+}
+
+.overview-section p {
+    font-size: 1.1rem;
+}
+
+.overview-section span {
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 1.2rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* === Chart Section === */
+/* Conteneur pour les graphiques */
+.chart-container {
+    width: 100%;
+    position: relative;
+    margin: var(--spacing-md) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--light);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+}
+
+#myChart {
+    max-width: 90%;
+    max-height: 450px;
+}
+
+/* === Monthly Section === */
+/* Section pour les informations mensuelles */
+.monthly-section {
+    display: grid;
+    gap: var(--spacing-sm);
+    text-align: center;
+}
+
+.monthly-section p {
+    font-size: 1.1rem;
+}
+
+.monthly-section span {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* === Transactions Section === */
+/* Liste des transactions */
+.transactions-section ul {
+    list-style: none;
+    display: grid;
+    gap: var(--spacing-sm);
+}
+
+.transactions-section li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.transactions-section li:hover {
+    transform: translateX(5px);
+    background: rgba(94, 96, 206, 0.1);
+}
+
+/* Actions sur les transactions (éditer, supprimer) */
+.transaction-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.btn-action {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 0.9rem;
+}
+
+.btn-delete {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #cc0058;
+}
+
+.btn-edit {
+    background: var(--success);
+    color: white;
+}
+
+.btn-edit:hover {
+    background: #3aa8c1;
+}
+
+/* === Utility Classes === */
+/* Classe pour masquer un élément */
+.hidden {
+    display: none !important;
+}
+
+/* Mode édition pour une transaction */
+.edit-mode {
+    border-left: 4px solid var(--success);
+    animation: pulseBorder 1.5s infinite;
+}
+
+@keyframes pulseBorder {
+    0%, 100% { border-left-width: 4px; }
+    50% { border-left-width: 8px; }
+}
+
+/* === Accessibility Enhancements === */
+/* Améliore la visibilité du focus clavier */
+:focus {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+button:focus,
+a:focus {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* === Responsive Design === */
+/* Adaptation du design pour tablettes */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px;
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+
+    .logo span,
+    .nav-link span {
+        display: none;
+    }
+
+    .nav-link {
+        justify-content: center;
+        padding: 0.8rem;
+    }
+
+    .main-content {
+        margin-left: 80px;
+        padding: var(--spacing-md);
+    }
+
+    .chart-container {
+        max-height: 350px;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+
+    .theme-toggle {
+        top: var(--spacing-sm);
+        right: var(--spacing-sm);
+    }
+}
+
+/* Adaptation du design pour mobiles */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 60px;
+    }
+
+    .main-content {
+        margin-left: 60px;
+        padding: var(--spacing-sm);
+    }
+
+    .input-section {
+        gap: var(--spacing-sm);
+    }
+
+    .input-section select,
+    .input-section input,
+    .input-section button {
+        font-size: 0.85rem;
+        padding: 0.7rem;
+    }
+
+    .chart-container {
+        max-height: 300px;
+    }
+}
